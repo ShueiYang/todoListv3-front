@@ -14,7 +14,7 @@ const Header = () => {
         </h1>    
       </div>
       <div className="flex gap-8">
-        <a href=""
+        <a href="https://github.com/ShueiYang/todoListv3-front"
           className="flex items-center"
           rel="noopener noreferrer"
           target="_blank"
