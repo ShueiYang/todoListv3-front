@@ -2,7 +2,9 @@
 
 TodoList Exercice from [Le Reacteur](https://github.com/lereacteur)
 
-This is the Frontend from the todolistv3 project, using React js front-end Javascript library
+This is the Frontend from the todolistv3 project, using React js front-end Javascript library and tailwind css.
+
+The backend for this project [here](https://github.com/ShueiYang/todolistv3-api)
 
 Feature: 
 
