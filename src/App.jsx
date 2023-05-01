@@ -12,6 +12,7 @@ function App() {
 
   const [unCheckTasks, setUnCheckTasks] = useState([]);
   const [checkTasks, setCheckTasks] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   
   // this hooks to trigger this function to fetch data when the component mount.
@@ -21,6 +22,8 @@ function App() {
     const { signal } = controller;
 
     const getToDoList = async () => {
+    // enable loading state
+      setLoading(true);
       try {
         const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/`, {signal})
         if(response.status === 200) {
@@ -38,14 +41,16 @@ function App() {
           setCheckTasks(completedTasks);
           setUnCheckTasks(incompletedTasks)
         }
-      } catch (err) {
-    // to avoid error from cancelling request from react strict Mode.
+      } catch (err) {     
+        // to avoid error from cancelling request from react strict Mode.
         if(err.name === "CanceledError") {
           console.log("Request cancelled!")
         } else {
           console.error(err)
           setError(err)
         }   
+      } finally {
+        setLoading(false);
       }
     }
     getToDoList();
@@ -71,17 +76,24 @@ function App() {
     <div className="container flex flex-col items-center">
       <Header />
 
-      <main className="flex flex-col grow justify-center px-2 mt-6">
-        <TodolistCheck 
-          tasks={unCheckTasks} 
-          toggleCheck={toggleCheck}
-          deleteTask={deleteTask} 
-        />
-        <TodolistCheck 
-          tasks={checkTasks}  
-          toggleCheck={toggleCheck}
-          deleteTask={deleteTask} 
-        />    
+      <main className="flex flex-col grow justify-center px-2 mt-6">    
+       { loading ? 
+          <div className="text-center text-xl font-medium">
+            <h2>Loading ...</h2>
+          </div>
+        : <>
+            <TodolistCheck 
+              tasks={unCheckTasks} 
+              toggleCheck={toggleCheck}
+              deleteTask={deleteTask} 
+            />
+            <TodolistCheck 
+              tasks={checkTasks}  
+              toggleCheck={toggleCheck}
+              deleteTask={deleteTask} 
+            />    
+          </>
+       } 
         <InputForm addTask={addTask} error={error}/>
       </main>
       <Footer/>
