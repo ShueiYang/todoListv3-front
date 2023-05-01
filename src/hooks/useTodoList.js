@@ -8,7 +8,8 @@ function useTodolist(
     unCheckTasks,
     checkTasks    
 ) {
-    async function addTask(taskTitle) {
+    async function addTask(event, taskTitle) {
+        event.preventDefault();
       // reset error message under input
         setError(null)
         try {
