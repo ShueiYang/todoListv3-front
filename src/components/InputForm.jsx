@@ -11,9 +11,11 @@ const InputForm = ({addTask, error}) => {
   }
 
   return (
-    <div className="flex flex-col items-center sm:w-[80%] mt-4 mx-auto">
-      <div className="flex flex-col sm:flex-row items-center">
-        <form onSubmit={(e) => {handeSubmit(e, input)}}>
+    <div className="flex flex-col items-center sm:w-[80%] mt-4 mx-auto"> 
+        <form 
+          className="flex flex-col sm:flex-row items-center"
+          onSubmit={(e) => {handeSubmit(e, input)}}    
+        >
           <input 
               className="mx-8 w-72 text-slate-900 bg-[#e7f2ff] dark:bg-[#fcf4f8]"
               type="text" 
@@ -29,8 +31,7 @@ const InputForm = ({addTask, error}) => {
           >
               Add Task
           </button>
-        </form>
-      </div>
+        </form>  
       <span className="my-4 text-red-500">{error && error.message}</span>
     </div>
   )
